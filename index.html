@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Monster Store</title>
+<style>
+:root{--bg:#f3f1fa;--card:#fff;--tx:#17142b;--mu:#6b6785;--ac:#7c3aed;--g:#22c55e;--r:#ef4444;--bd:#e2defa;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c0a18;--card:#17132b;--tx:#f1eeff;--mu:#9a95bd;--bd:#2b2550}}
+:root[data-theme="dark"]{--bg:#0c0a18;--card:#17132b;--tx:#f1eeff;--mu:#9a95bd;--bd:#2b2550}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;padding-bottom:70px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:30}
+button,input,select,textarea{font:inherit;color:inherit}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+.logo{font-weight:900;font-size:21px;letter-spacing:1px;background:linear-gradient(90deg,#22c55e,#7c3aed,#ec4899,#22c55e);background-size:300%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:fl 4s linear infinite;text-shadow:0 0 18px #7c3aed55}
+@keyframes fl{to{background-position:300%}}
+.ib{display:flex;gap:6px}.ib button{width:34px;height:34px;border-radius:50%;border:1px solid var(--bd);background:var(--bg);cursor:pointer;font-size:15px}
+main{max-width:640px;margin:auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-bottom:12px}
+.hero{background:linear-gradient(135deg,#22c55e,#7c3aed 60%,#ec4899);color:#fff;border:0;text-align:center;padding:24px 14px;position:relative;overflow:hidden}
+.hero h1{margin:0 0 4px;font-size:24px}.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 40%,#fff4 50%,transparent 60%);animation:sh 3s infinite}
+@keyframes sh{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.chips span{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:6px 12px;font-size:13px;font-weight:600}
+.btn{display:block;width:100%;border:0;border-radius:12px;padding:12px;background:var(--ac);color:#fff;font-weight:700;cursor:pointer;margin-top:8px;text-align:center;text-decoration:none}
+.btn.s{background:var(--bg);color:var(--tx);border:1px solid var(--bd)}.btn.g{background:var(--g)}.btn.r{background:var(--r)}
+.btn.sm{display:inline-block;width:auto;padding:6px 12px;margin:2px;font-size:13px}
+input,select,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);margin-top:6px}
+label{font-size:13px;color:var(--mu);display:block;margin-top:10px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pack{display:flex;justify-content:space-between;align-items:center;padding:12px;border:1px solid var(--bd);border-radius:12px;margin-top:8px;cursor:pointer;background:var(--bg)}
+.pack:hover,.pack.on{border-color:var(--ac);box-shadow:0 0 0 2px #7c3aed44}
+.mu{color:var(--mu);font-size:13px}.hide{display:none!important}
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:20;background:var(--card);border-top:1px solid var(--bd);display:flex;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+.tabs button{flex:1;border:0;background:none;font-size:11px;color:var(--mu);cursor:pointer;padding:4px}.tabs button b{display:block;font-size:19px}.tabs .on{color:var(--ac);font-weight:700}
+.st{font-size:12px;font-weight:700;border-radius:8px;padding:3px 8px;color:#fff}.st.pending{background:#f59e0b}.st.accepted{background:var(--g)}.st.rejected{background:var(--r)}
+.live{display:flex;gap:10px}.live>div{flex:1;text-align:center}.live b{font-size:22px;display:block}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--r);animation:pu 1s infinite;margin-right:5px}@keyframes pu{50%{opacity:.2}}
+.ov{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;color:#fff;background:radial-gradient(circle at 50% 30%,#4c1d95,#0c0a18)}
+.ov.ok{background:radial-gradient(circle at 50% 30%,#15803d,#052e16)}.ov.no{background:radial-gradient(circle at 50% 30%,#b91c1c,#2a0707)}
+.ring{width:130px;height:130px;border-radius:50%;border:6px solid #ffffff22;border-top-color:#22c55e;border-right-color:#ec4899;animation:sp 1s linear infinite;box-shadow:0 0 40px #7c3aed;margin-bottom:22px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.big{font-size:90px;animation:pop .6s cubic-bezier(.2,2,.4,1);filter:drop-shadow(0 0 25px #fff)}@keyframes pop{from{transform:scale(0)}}
+.ov .card{color:var(--tx);text-align:left;width:100%;max-width:380px}
+.pt{position:absolute;font-size:22px;animation:up 3s linear infinite}@keyframes up{from{transform:translateY(100vh)}to{transform:translateY(-20vh)}}
+.chat{max-height:260px;overflow:auto}.m{padding:8px 12px;border-radius:12px;margin:6px 0;max-width:85%;background:var(--bg)}.m.u{background:var(--ac);color:#fff;margin-left:auto}
+.bot{font-size:44px;display:inline-block;animation:bob 2s ease-in-out infinite;filter:drop-shadow(0 0 10px #22c55e)}@keyframes bob{50%{transform:translateY(-6px)}}
+.star{cursor:pointer;font-size:26px;color:#cbd5e1}.star.on{color:#fbbf24}
+.mt{width:56px;height:56px}
+.bal{text-align:center;background:linear-gradient(135deg,#7c3aed,#22c55e);color:#fff;border:0}.bal b{font-size:36px}
+.sheet{position:fixed;inset:0;z-index:40;background:var(--bg);overflow:auto;padding:14px;padding-top:calc(14px + env(safe-area-inset-top,0px))}
+h3{margin:0 0 6px}
+.cp{border:0;background:var(--ac);color:#fff;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:12px}
+img.pf{max-width:100%;border-radius:10px;margin-top:8px}
+</style></head><body>
+<div id="app"></div>
+<script>
+const FIREBASE_CONFIG={apiKey:"PEGA_AQUI",authDomain:"",projectId:"",storageBucket:"",messagingSenderId:"",appId:""};
+window.FBP=(async()=>{if(!FIREBASE_CONFIG.apiKey||FIREBASE_CONFIG.apiKey==="PEGA_AQUI")throw 0;
+const V="https://www.gstatic.com/firebasejs/10.12.2/",[a,au,fs]=await Promise.all([import(V+"firebase-app.js"),import(V+"firebase-auth.js"),import(V+"firebase-firestore.js")]);
+const app=a.initializeApp(FIREBASE_CONFIG);return{...au,...fs,auth:au.getAuth(app),fs:fs.getFirestore(app)}})();
+window.FBP.catch(()=>{});
+</script>
+<script>
